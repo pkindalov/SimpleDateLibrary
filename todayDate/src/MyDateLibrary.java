@@ -1,9 +1,5 @@
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.zip.DataFormatException;
 
 /**
  * Created by r3v3nan7 on 11.03.17.
@@ -37,14 +33,14 @@ public class MyDateLibrary {
         //Date todayDate;
         StringBuilder date = new StringBuilder();
 
-        cal.clear(Calendar.HOUR_OF_DAY);
-        cal.clear(Calendar.AM_PM);
-        cal.clear(Calendar.MINUTE);
-        cal.clear(Calendar.SECOND);
-        cal.clear(Calendar.MILLISECOND);
+        this.cal.clear(Calendar.HOUR_OF_DAY);
+        this.cal.clear(Calendar.AM_PM);
+        this.cal.clear(Calendar.MINUTE);
+        this.cal.clear(Calendar.SECOND);
+        this.cal.clear(Calendar.MILLISECOND);
 
-        int dayOfMonth = cal.get(cal.DAY_OF_MONTH);
-        int currentMonth = cal.MONTH + 1;
+        int dayOfMonth = this.cal.get(cal.DAY_OF_MONTH);
+        int currentMonth = this.cal.MONTH + 1;
 
         if(dayOfMonth < 10){
             date.append("0");
@@ -72,22 +68,14 @@ public class MyDateLibrary {
     }
 
 
+    public String dateAfterXdaysFromNow(int howManyDays){
 
-
-
-
-    public Date todayDate() throws DataFormatException, ParseException {
-        Date currentDate = new Date();
         StringBuilder date = new StringBuilder();
 
-        cal.clear(Calendar.HOUR_OF_DAY);
-        cal.clear(Calendar.AM_PM);
-        cal.clear(Calendar.MINUTE);
-        cal.clear(Calendar.SECOND);
-        cal.clear(Calendar.MILLISECOND);
-
+        cal.setTime(new Date());
+        cal.add(cal.DATE, howManyDays);
         int dayOfMonth = cal.get(cal.DAY_OF_MONTH);
-        int currentMonth = cal.MONTH + 1;
+        int currentMonth = cal.get(cal.MONTH + 1);
 
         if(dayOfMonth < 10){
             date.append("0");
@@ -109,27 +97,9 @@ public class MyDateLibrary {
         date.append(this.delimeter);
         date.append(cal.get(cal.YEAR));
 
-        DateFormat sdf = new SimpleDateFormat("dd-ML-yyyy");
 
-        switch (delimeter){
-            case '/':
-                sdf = new SimpleDateFormat("dd/ML/yyyy");
-                break;
-            case ' ':
-                sdf = new SimpleDateFormat("dd ML yyyy");
-                break;
-            case '.':
-                sdf = new SimpleDateFormat("dd.ML.yyyy");
-                break;
-            case '\\':
-                sdf = new SimpleDateFormat("dd\\ML\\yyyy");
-                break;
-        }
+        return date.toString();
 
-
-        currentDate = sdf.parse(date.toString());
-
-        return currentDate;
     }
 
 
