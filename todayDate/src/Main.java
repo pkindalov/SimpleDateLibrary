@@ -1,6 +1,4 @@
-import java.text.DateFormat;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.zip.DataFormatException;
 
@@ -25,23 +23,26 @@ public class Main {
         System.out.println(today.getClass().getName());
         System.out.println();
 
-        String dateStr = today.todayDateStr();
-        System.out.println(dateStr);
 
-        DateFormat df = new SimpleDateFormat("dd-ML-yyyy");
-        Date date = df.parse(dateStr);
-        System.out.println(date);
-        System.out.println(date.getClass().getName());
+
+//        DateFormat df = new SimpleDateFormat("dd-ML-yyyy");
+//        Date date = df.parse(dateStr);
+//        System.out.println(date);
+//        System.out.println(date.getClass().getName());
 
         System.out.println("-----------------------------------------------------------");
 
-        System.out.println(today.todayDate());
-        System.out.println(today2.todayDate());
-        System.out.println(today3.todayDate());
-        System.out.println(today4.todayDate());
-        System.out.println(today5.todayDate());
-        System.out.println(today.getClass().getName());
 
+        MyDateLibrary after10days = new MyDateLibrary(new Date());
+        System.out.println(after10days.dateAfterXdaysFromNow(23));
+
+
+//        Date m = new Date();
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(m);
+//        cal.add(Calendar.DATE, 23); // 10 is the days you want to add or subtract
+//        m = cal.getTime();
+//        System.out.println(m);
 
     }
 
