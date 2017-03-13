@@ -29,6 +29,10 @@ public class MyDateLibrary {
     }
 
 
+    /*
+        This method return today date in string. Formatting numbers and added leading zeroes
+     */
+
     public String todayDateStr(){
         //Date todayDate;
         StringBuilder date = new StringBuilder();
@@ -42,6 +46,16 @@ public class MyDateLibrary {
         int dayOfMonth = this.cal.get(cal.DAY_OF_MONTH);
         int currentMonth = this.cal.MONTH + 1;
 
+        appendLeadingZero(date, dayOfMonth, currentMonth);
+
+
+        return date.toString();
+
+    }
+
+
+    //this method append 0 to date. If date of mount is from 0-9 , then before digit append 0 -> 01, 02,03, 04...
+    private void appendLeadingZero(StringBuilder date, int dayOfMonth, int currentMonth) {
         if(dayOfMonth < 10){
             date.append("0");
             date.append(dayOfMonth);
@@ -61,11 +75,15 @@ public class MyDateLibrary {
 
         date.append(this.delimeter);
         date.append(cal.get(cal.YEAR));
-
-
-        return date.toString();
-
     }
+
+
+
+
+
+
+
+
 
 
     public String dateAfterXdaysFromNow(int howManyDays){
@@ -77,25 +95,7 @@ public class MyDateLibrary {
         int dayOfMonth = cal.get(cal.DAY_OF_MONTH);
         int currentMonth = cal.get(cal.MONTH + 1);
 
-        if(dayOfMonth < 10){
-            date.append("0");
-            date.append(dayOfMonth);
-        }else {
-            date.append(dayOfMonth);
-        }
-
-        date.append(this.delimeter);
-
-        if(currentMonth < 10){
-            date.append("0");
-            date.append(currentMonth);
-        }else {
-            date.append(currentMonth);
-        }
-
-
-        date.append(this.delimeter);
-        date.append(cal.get(cal.YEAR));
+        appendLeadingZero(date, dayOfMonth, currentMonth);
 
 
         return date.toString();
