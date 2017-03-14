@@ -85,18 +85,42 @@ public class MyDateLibrary {
 
 
 
-
+    //method which return x days after today
     public String dateAfterXdaysFromNow(int howManyDays){
 
         StringBuilder date = new StringBuilder();
 
+        int day = cal.get(cal.DAY_OF_MONTH);
+        cal.add(cal.DAY_OF_MONTH, howManyDays);
+
+        int month = cal.MONTH + 1;
+        int currentMontTotalDays = cal.getActualMaximum(cal.DAY_OF_MONTH) + 1;
+
+        if(howManyDays + day > currentMontTotalDays){
+            month++;
+            day = (howManyDays + day) - currentMontTotalDays;
+        }else {
+            day = howManyDays + day;
+        }
+
+        appendLeadingZero(date, day, month);
+
+
+        return date.toString();
+
+    }
+
+
+    //method which return x days before today
+    public String dateBeforeXdaysFromNow(int howManyDays){
+        StringBuilder date = new StringBuilder();
+
         cal.setTime(new Date());
-        cal.add(cal.DATE, howManyDays);
+        cal.add(cal.DATE, -howManyDays);
         int dayOfMonth = cal.get(cal.DAY_OF_MONTH);
-        int currentMonth = cal.get(cal.MONTH + 1);
+        int currentMont = cal.get(cal.MONTH + 1);
 
-        appendLeadingZero(date, dayOfMonth, currentMonth);
-
+        appendLeadingZero(date, dayOfMonth, currentMont);
 
         return date.toString();
 
