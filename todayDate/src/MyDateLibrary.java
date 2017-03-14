@@ -19,12 +19,32 @@ public class MyDateLibrary {
     public MyDateLibrary(Date dateNow){
         this.setDateNow(dateNow);
         this.cal = Calendar.getInstance();
-        this.delimeter = '-';
+        this.setDelimeter('-');
     }
 
 
     public MyDateLibrary(Date dateNow, char delimeter){
         this(dateNow);
+        this.setDelimeter(delimeter);
+    }
+
+    public MyDateLibrary(char delimeter){
+        this.setDateNow(new Date());
+        this.cal = Calendar.getInstance();
+        this.setDelimeter(delimeter);
+    }
+
+    public MyDateLibrary(){
+        this.setDateNow(new Date());
+        this.cal = Calendar.getInstance();
+        this.setDelimeter('-');
+    }
+
+
+
+
+    private void setDelimeter(char delimeter){
+        //to check later delimeter is it valid
         this.delimeter = delimeter;
     }
 
@@ -103,7 +123,7 @@ public class MyDateLibrary {
     public String dateBeforeXdaysFromNow(int howManyDays){
         StringBuilder date = new StringBuilder();
 
-        
+
         cal.set(Calendar.DAY_OF_MONTH, cal.get(Calendar.DAY_OF_MONTH)-howManyDays);
         int day = cal.get(cal.DAY_OF_MONTH);
         int month = cal.get(cal.MONTH) + 1;
