@@ -74,7 +74,8 @@ public class MyDateLibrary {
     }
 
 
-    //this method append 0 to date. If date of mount is from 0-9 , then before digit append 0 -> 01, 02,03, 04...
+    //this method append 0 to date. If date of mount is from 0-9 , then before digit append 0 -> 01, 02,03, 04... This is a helping method for another 2 methods - dateAfterXdaysFromNow and dateBeforeXdaysFromNow
+
     private void appendLeadingZero(StringBuilder date, int dayOfMonth, int currentMonth) {
         if(dayOfMonth < 10){
             date.append("0");
@@ -97,6 +98,30 @@ public class MyDateLibrary {
         date.append(cal.get(cal.YEAR));
     }
 
+
+    private String appendLeadingZero(Integer day, Integer month, Integer year){
+        StringBuilder date = new StringBuilder();
+
+        if(day < 10){
+            date.append("0" + day);
+        }else {
+            date.append(day);
+        };
+
+        date.append("-");
+
+        if (month < 10){
+            date.append("0" + month);
+        }else {
+            date.append(month);
+        }
+
+        date.append("-");
+        date.append(year);
+
+
+        return date.toString();
+    }
 
 
 
@@ -134,6 +159,18 @@ public class MyDateLibrary {
 
         return date.toString();
 
+    }
+
+
+
+    @Override
+    public String toString(){
+        int day = cal.get(cal.DAY_OF_MONTH);
+        int month = cal.MONTH + 1;
+        int year = cal.get(cal.YEAR);
+
+//        return day + "+" + month + "+" + year;
+        return appendLeadingZero(day, month, year);
     }
 
 
